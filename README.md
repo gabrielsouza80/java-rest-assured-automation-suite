@@ -22,13 +22,43 @@ O objetivo deste projeto é praticar, estruturar e evoluir testes de API seguind
 mvn clean test
 ```
 
+## Cenários implementados
+- `UsersCrudTest`: fluxo completo CRUD usando `REQRES`
+    - `GET /users?page=2`
+    - `GET /users/2`
+    - `GET /users/23` (not found)
+    - `POST /users`
+    - `PUT /users/2`
+    - `DELETE /users/2`
+
+- `UserPayloadTest`: valida montagem de payloads para criação e atualização
+- `TestDataTest`: valida leitura dos dados de teste do JSON
+- `TestConfigTest`: valida leitura das configurações do projeto
+
+> Observação: o REQRES atual pode exigir API key do dashboard (`api.practice.key` em `src/test/resources/config/config.properties`).
+> Sem chave válida, os cenários de `UsersCrudTest` são pulados automaticamente.
+
+## Estratégia de testes (didática)
+- Testes de `config/data/payload` rodam sem internet e garantem a base do framework
+- Testes de `UsersCrudTest` validam os endpoints reais da API
+- Assim você aprende primeiro a estrutura, depois o comportamento HTTP
+
 ## Estrutura inicial
 ```text
 src
  └── test
-      └── java
-          └── com
-              └── gabriel
-                  ├── base
-                  └── tests
+      ├── java/com/gabriel
+      │   ├── base
+      │   ├── config
+      │   ├── endpoints
+      │   ├── payloads
+      │   └── tests
+      └── resources
+          ├── config
+          └── data
 ```
+
+## Equivalência com Playwright
+- `pages` (UI) -> `endpoints` (API)
+- `BaseTest` continua existindo para setup global
+- `config` e `resources/data` continuam com o mesmo papel
