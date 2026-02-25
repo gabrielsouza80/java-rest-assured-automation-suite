@@ -20,10 +20,15 @@ O objetivo deste projeto é praticar, estruturar e evoluir testes de API seguind
 ## Como executar
 ```bash
 mvn clean test
+```
+
+## Estrutura inicial
+```text
 src
  └── test
       └── java
-          ├── base
-          ├── endpoints
-          ├── payloads
-          └── tests
+          └── com
+              └── gabriel
+                  ├── base
+                  └── tests
+```
