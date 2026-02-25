@@ -1,13 +1,19 @@
 {
-  "users": {
+  "posts": {
     "create": {
-      "name": "Gabriel QA",
-      "job": "QA Engineer"
+      "title": "foo",
+      "body": "bar",
+      "userId": 1
     },
     "update": {
-      "id": 2,
-      "name": "Gabriel QA Senior",
-      "job": "Senior QA Engineer"
+      "id": 1,
+      "title": "foo",
+      "body": "bar",
+      "userId": 1
+    },
+    "patch": {
+      "id": 1,
+      "title": "foo"
     }
   }
 }

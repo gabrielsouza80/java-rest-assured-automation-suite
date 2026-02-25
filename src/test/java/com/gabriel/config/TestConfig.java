@@ -41,15 +41,6 @@ public final class TestConfig {
     }
 
     public static String getPracticeBaseUrl() {
-        return PROPERTIES.getProperty("api.practice.base.url", "https://reqres.in/api");
-    }
-
-    public static String getPracticeApiKey() {
-        return PROPERTIES.getProperty("api.practice.key", "");
-    }
-
-    public static boolean hasPracticeApiKey() {
-        String apiKey = getPracticeApiKey();
-        return apiKey != null && !apiKey.isBlank();
+        return PROPERTIES.getProperty("api.practice.base.url", "https://jsonplaceholder.typicode.com");
     }
 }

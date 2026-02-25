@@ -1,0 +1,10 @@
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\base\BaseTest.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\config\TestConfig.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\config\TestData.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\endpoints\PostsEndpoint.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\payloads\PostPayload.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\tests\PostPayloadTest.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\tests\PostsCrudTest.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\tests\PostsTrainingTest.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\tests\TestConfigTest.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\tests\TestDataTest.java

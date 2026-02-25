@@ -4,7 +4,7 @@ Framework de automação de testes de API desenvolvido em Java utilizando Rest A
 O objetivo deste projeto é praticar, estruturar e evoluir testes de API seguindo padrões corporativos de modularização, organização e boas práticas.
 
 ## Tecnologias
-- Java 17+
+- Java 21 (LTS)
 - Maven
 - Rest Assured
 - JUnit 5
@@ -17,30 +17,59 @@ O objetivo deste projeto é praticar, estruturar e evoluir testes de API seguind
 - Estruturar o projeto em camadas (base, endpoints, payloads, tests)
 - Evoluir para autenticação, testes parametrizados e relatórios
 
+## Pré-requisitos
+- JDK 21 instalado e configurado no `JAVA_HOME`
+- Maven 3.9+
+
 ## Como executar
 ```bash
 mvn clean test
 ```
 
-## Cenários implementados
-- `UsersCrudTest`: fluxo completo CRUD usando `REQRES`
-    - `GET /users?page=2`
-    - `GET /users/2`
-    - `GET /users/23` (not found)
-    - `POST /users`
-    - `PUT /users/2`
-    - `DELETE /users/2`
+## Saída legível (PowerShell)
+Se o log bruto do VS Code estiver confuso, rode:
 
-- `UserPayloadTest`: valida montagem de payloads para criação e atualização
+```powershell
+./scripts/run-training.ps1
+```
+
+Para uma classe específica:
+
+```powershell
+./scripts/run-training.ps1 -TestClass PostsCrudTest
+```
+
+## Configuração
+Arquivo: `src/test/resources/config/config.properties`
+
+```properties
+api.content.type=application/json
+api.practice.base.url=https://jsonplaceholder.typicode.com
+```
+
+- Não é necessária API key para JSONPlaceholder.
+
+## Cenários implementados
+- `PostsCrudTest`: fluxo completo usando `JSONPlaceholder`
+    - `GET /posts`
+    - `GET /posts/1`
+    - `GET /posts/99999` (not found)
+    - `POST /posts`
+    - `PUT /posts/1`
+    - `PATCH /posts/1`
+    - `DELETE /posts/1`
+    - `GET /posts?userId=1` (filtro)
+    - `GET /posts/1/comments` (rota aninhada)
+
+- `PostPayloadTest`: valida montagem de payloads para criação e atualização
 - `TestDataTest`: valida leitura dos dados de teste do JSON
 - `TestConfigTest`: valida leitura das configurações do projeto
 
-> Observação: o REQRES atual pode exigir API key do dashboard (`api.practice.key` em `src/test/resources/config/config.properties`).
-> Sem chave válida, os cenários de `UsersCrudTest` são pulados automaticamente.
+> Observação: JSONPlaceholder simula persistência para POST/PUT/PATCH/DELETE.
 
 ## Estratégia de testes (didática)
 - Testes de `config/data/payload` rodam sem internet e garantem a base do framework
-- Testes de `UsersCrudTest` validam os endpoints reais da API
+- Testes de `PostsCrudTest` validam os endpoints reais da API
 - Assim você aprende primeiro a estrutura, depois o comportamento HTTP
 
 ## Estrutura inicial

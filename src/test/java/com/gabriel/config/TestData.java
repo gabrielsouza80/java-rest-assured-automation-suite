@@ -40,13 +40,18 @@ public final class TestData {
         throw new IllegalStateException("Arquivo data/tests-data.json não encontrado.");
     }
 
-    public static Map<String, Object> getCreateUserData() {
-        return OBJECT_MAPPER.convertValue(ROOT.path("users").path("create"), new TypeReference<>() {
+    public static Map<String, Object> getCreatePostData() {
+        return OBJECT_MAPPER.convertValue(ROOT.path("posts").path("create"), new TypeReference<>() {
         });
     }
 
-    public static Map<String, Object> getUpdateUserData() {
-        return OBJECT_MAPPER.convertValue(ROOT.path("users").path("update"), new TypeReference<>() {
+    public static Map<String, Object> getUpdatePostData() {
+        return OBJECT_MAPPER.convertValue(ROOT.path("posts").path("update"), new TypeReference<>() {
+        });
+    }
+
+    public static Map<String, Object> getPatchPostData() {
+        return OBJECT_MAPPER.convertValue(ROOT.path("posts").path("patch"), new TypeReference<>() {
         });
     }
 }
