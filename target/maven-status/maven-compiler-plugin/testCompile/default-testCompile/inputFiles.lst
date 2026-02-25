@@ -1,2 +1,9 @@
-C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\base\TestBase.java
-C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\tests\HttpBinGetTest.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\base\BaseTest.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\config\TestConfig.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\config\TestData.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\endpoints\UsersEndpoint.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\payloads\UserPayload.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\tests\TestConfigTest.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\tests\TestDataTest.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\tests\UserPayloadTest.java
+C:\Gabriel\projects\rest-assured\java-rest-assured-automation-suite\src\test\java\com\gabriel\tests\UsersCrudTest.java

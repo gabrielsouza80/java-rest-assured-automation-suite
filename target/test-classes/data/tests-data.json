@@ -1,0 +1,13 @@
+{
+  "users": {
+    "create": {
+      "name": "Gabriel QA",
+      "job": "QA Engineer"
+    },
+    "update": {
+      "id": 2,
+      "name": "Gabriel QA Senior",
+      "job": "Senior QA Engineer"
+    }
+  }
+}
