@@ -1,14 +1,14 @@
 package com.gabriel.config;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public final class TestData {
 
@@ -22,7 +22,7 @@ public final class TestData {
         try (InputStream inputStream = openTestDataStream()) {
             return OBJECT_MAPPER.readTree(inputStream);
         } catch (IOException error) {
-            throw new IllegalStateException("Falha ao carregar dados de teste.", error);
+            throw new IllegalStateException("Failed to load test data.", error);
         }
     }
 
@@ -37,7 +37,7 @@ public final class TestData {
             return Files.newInputStream(fallbackPath);
         }
 
-        throw new IllegalStateException("Arquivo data/tests-data.json não encontrado.");
+        throw new IllegalStateException("File data/tests-data.json was not found.");
     }
 
     public static Map<String, Object> getCreatePostData() {

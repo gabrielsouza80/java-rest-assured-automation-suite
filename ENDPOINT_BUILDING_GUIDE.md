@@ -1,44 +1,44 @@
-# Guia: Como Construir Endpoints do Zero com Rest Assured
+# Guide: How to Build Endpoints from Scratch with Rest Assured
 
-## Checklist em 6 Passos
+## 6-Step Checklist
 
-Use este checklist **sempre que ler uma documentação de API** e precisar transformar em código.
+Use this checklist **whenever you read API documentation** and need to turn it into code.
 
 ---
 
-### **PASSO 1: Ler a Documentação**
+### **STEP 1: Read the Documentation**
 
-Exemplo da doc:
+Doc example:
 ```
 GET /posts/1
 Response: { id, title, body, userId }
 Status: 200
 ```
 
-**Questões a fazer:**
-- ✅ Qual é o **verbo HTTP**? (GET, POST, PUT, PATCH, DELETE)
-- ✅ Qual é a **rota/endpoint**? (/posts, /posts/{id}, /posts/1/comments)
-- ✅ Qual é o **path param**? (ex: {id}, {userId})
-- ✅ Qual é o **body/payload**? (POST/PUT/PATCH enviam dados)
-- ✅ Qual é o **status esperado**? (200, 201, 404, etc)
-- ✅ Quais **campos retorna**? (id, title, body, userId)
+**Questions to ask:**
+- ✅ What is the **HTTP verb**? (GET, POST, PUT, PATCH, DELETE)
+- ✅ What is the **route/endpoint**? (/posts, /posts/{id}, /posts/1/comments)
+- ✅ What is the **path param**? (ex: {id}, {userId})
+- ✅ What is the **body/payload**? (POST/PUT/PATCH send data)
+- ✅ What is the **expected status**? (200, 201, 404, etc)
+- ✅ Which **fields are returned**? (id, title, body, userId)
 
 ---
 
-### **PASSO 2: Montar o Método no Endpoint**
+### **STEP 2: Build the Endpoint Method**
 
 **Template:**
 ```java
-public Response nomeMetodo(paramSeNecessario) {
+public Response methodName(requiredParam) {
     return request()
             .when()
-            .VERBO("/rota", paramSeNecessario);
+            .VERB("/route", requiredParam);
 }
 ```
 
-**Exemplos reais:**
+**Real examples:**
 
-**GET simples:**
+**Simple GET:**
 ```java
 public Response getPosts() {
     return request()
@@ -47,7 +47,7 @@ public Response getPosts() {
 }
 ```
 
-**GET com path param:**
+**GET with path param:**
 ```java
 public Response getPostById(int postId) {
     return request()
@@ -56,7 +56,7 @@ public Response getPostById(int postId) {
 }
 ```
 
-**GET com query param (filtro):**
+**GET with query param (filter):**
 ```java
 public Response getPostsByUserId(int userId) {
     return request()
@@ -66,7 +66,7 @@ public Response getPostsByUserId(int userId) {
 }
 ```
 
-**POST com body:**
+**POST with body:**
 ```java
 public Response createPost(Map<String, Object> body) {
     return request()
@@ -76,7 +76,7 @@ public Response createPost(Map<String, Object> body) {
 }
 ```
 
-**PUT com path param + body:**
+**PUT with path param + body:**
 ```java
 public Response updatePost(int postId, Map<String, Object> body) {
     return request()
@@ -86,7 +86,7 @@ public Response updatePost(int postId, Map<String, Object> body) {
 }
 ```
 
-**DELETE com path param:**
+**DELETE with path param:**
 ```java
 public Response deletePost(int postId) {
     return request()
@@ -106,9 +106,9 @@ public Response getCommentsByPostId(int postId) {
 
 ---
 
-### **PASSO 3: Montar o Payload (se precisar)**
+### **STEP 3: Build the Payload (if needed)**
 
-**Para POST/PUT/PATCH, crie um método no `PostPayload`:**
+**For POST/PUT/PATCH, create a method in `PostPayload`:**
 
 ```java
 public static Map<String, Object> create(String title, String body, int userId) {
@@ -122,13 +122,13 @@ public static Map<String, Object> create(String title, String body, int userId) 
 
 ---
 
-### **PASSO 4: Criar o Teste**
+### **STEP 4: Create the Test**
 
 **Template:**
 ```java
 @Test
-@DisplayName("GET /posts/1 retorna post válido")
-void testeNome() {
+@DisplayName("GET /posts/1 returns a valid post")
+void testName() {
     Response response = endpoint.getPostById(1);
 
     assertThat(response.statusCode(), equalTo(200));
@@ -137,33 +137,33 @@ void testeNome() {
 }
 ```
 
-**Padrão de validação:**
+**Validation pattern:**
 ```java
-// 1. Valida status HTTP
+// 1. Validate HTTP status
 assertThat(response.statusCode(), equalTo(200));
 
-// 2. Valida 1-2 campos chave
+// 2. Validate 1-2 key fields
 assertThat(response.path("id"), equalTo(1));
 assertThat(response.path("title"), notNullValue());
 
-// 3. Para lista, valida tamanho + primeiro item
+// 3. For list responses, validate size + first item
 assertThat(response.path("size()"), greaterThan(0));
 assertThat(response.path("[0].userId"), equalTo(1));
 ```
 
 ---
 
-### **PASSO 5: Rodar o Teste**
+### **STEP 5: Run the Test**
 
 ```bash
-# Teste específico
+# Specific test class
 mvn -Dtest=PostsTrainingTest test
 
-# Ou com script
+# Or with script
 ./scripts/run-training.ps1 -TestClass PostsTrainingTest
 ```
 
-**Esperado:**
+**Expected result:**
 ```
 Tests run: X, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
@@ -171,41 +171,41 @@ BUILD SUCCESS
 
 ---
 
-### **PASSO 6: Debugar se Falhar**
+### **STEP 6: Debug if It Fails**
 
-**Problema: Status errado**
-- Verifique se o verbo está correto (GET vs POST, etc)
-- Verifique se a rota está correta
+**Problem: Wrong status**
+- Check if the HTTP verb is correct (GET vs POST, etc)
+- Check if the route is correct
 
-**Problema: Campo não existe**
-- Rode o teste e veja o JSON retornado
-- Use `.response.prettyPrint()` para visualizar
+**Problem: Missing field**
+- Run the test and inspect returned JSON
+- Use `.response.prettyPrint()` to visualize
 
-**Problema: Compilação falha**
-- Verifique imports (`import static org.hamcrest...`)
-- Verifique se tem `.` ou `;` faltando
-
----
-
-## Resumo Visual
-
-| Tipo | Verbo | Exemplo | Retorna |
-|------|-------|---------|---------|
-| Get simples | GET | `/posts` | Lista |
-| Get por ID | GET | `/posts/1` | Um item |
-| Get filtrado | GET | `/posts?userId=1` | Lista filtrada |
-| Get nested | GET | `/posts/1/comments` | Comentários |
-| Criar | POST | `/posts` + body | Item criado (201) |
-| Atualizar todo | PUT | `/posts/1` + body | Item atualizado (200) |
-| Atualizar parte | PATCH | `/posts/1` + body | Item atualizado (200) |
-| Remover | DELETE | `/posts/1` | Vazio (200) |
-| Erro | GET | `/posts/99999` | Vazio (404) |
+**Problem: Compilation failure**
+- Check imports (`import static org.hamcrest...`)
+- Check if any `.` or `;` is missing
 
 ---
 
-## Exemplo Completo do Zero
+## Visual Summary
 
-**Você lê na documentação:**
+| Type | Verb | Example | Returns |
+|------|------|---------|---------|
+| Simple Get | GET | `/posts` | List |
+| Get by ID | GET | `/posts/1` | Single item |
+| Filtered Get | GET | `/posts?userId=1` | Filtered list |
+| Nested Get | GET | `/posts/1/comments` | Comments |
+| Create | POST | `/posts` + body | Created item (201) |
+| Full update | PUT | `/posts/1` + body | Updated item (200) |
+| Partial update | PATCH | `/posts/1` + body | Updated item (200) |
+| Remove | DELETE | `/posts/1` | Empty (200) |
+| Error | GET | `/posts/99999` | Empty (404) |
+
+---
+
+## Complete Example from Scratch
+
+**You read in docs:**
 ```
 POST /comments
 Body: { postId, name, body, email }
@@ -213,9 +213,9 @@ Status: 201
 Response: { postId, id, name, body, email }
 ```
 
-**Você faz:**
+**You implement:**
 
-1️⃣ Cria método no endpoint:
+1️⃣ Create endpoint method:
 ```java
 public Response createComment(Map<String, Object> body) {
     return request()
@@ -225,7 +225,7 @@ public Response createComment(Map<String, Object> body) {
 }
 ```
 
-2️⃣ Cria payload:
+2️⃣ Create payload:
 ```java
 public static Map<String, Object> createComment(int postId, String name, String body, String email) {
     Map<String, Object> payload = new HashMap<>();
@@ -237,45 +237,45 @@ public static Map<String, Object> createComment(int postId, String name, String 
 }
 ```
 
-3️⃣ Cria teste:
+3️⃣ Create test:
 ```java
 @Test
-@DisplayName("POST /comments cria comentário")
-void deveCriarComentario() {
-    Map<String, Object> payload = PostPayload.createComment(1, "João", "Ótimo!", "joao@mail.com");
+@DisplayName("POST /comments creates comment")
+void shouldCreateComment() {
+    Map<String, Object> payload = PostPayload.createComment(1, "John", "Great!", "john@mail.com");
     Response response = endpoint.createComment(payload);
 
     assertThat(response.statusCode(), equalTo(201));
     assertThat(response.path("postId"), equalTo(1));
-    assertThat(response.path("name"), equalTo("João"));
+    assertThat(response.path("name"), equalTo("John"));
 }
 ```
 
-4️⃣ Roda:
+4️⃣ Run:
 ```bash
 mvn -Dtest=PostsTrainingTest test
 ```
 
-✅ **Pronto!**
+✅ **Done!**
 
 ---
 
-## Atalhos Rest Assured Comuns
+## Common Rest Assured Shortcuts
 
 ```java
-// Valor simples
+// Simple value
 response.path("id")
 
-// Dentro de array (primeiro item)
+// Inside array (first item)
 response.path("[0].title")
 
-// Tamanho do array
+// Array size
 response.path("size()")
 
-// Verificar nulo
-response.path("campo") != null
+// Null check
+response.path("field") != null
 
-// Pretty print (para debugar)
+// Pretty print (for debugging)
 response.prettyPrint()
 
 // Status code
@@ -287,14 +287,14 @@ response.header("Content-Type")
 
 ---
 
-## Próximos Passos
+## Next Steps
 
-- ✅ Leu este guia? Use em uma nova API
-- ✅ Construiu um endpoint? Crie o teste
-- ✅ Teste passou? Commita no Git
-- ✅ Ficou confuso? Volte ao **Passo 1** do checklist
+- ✅ Read this guide? Use it with a new API
+- ✅ Built an endpoint? Create the test
+- ✅ Test passed? Commit to Git
+- ✅ Still confused? Go back to **Step 1**
 
-**Dúvida? Consulte o código real:**
+**Need help? Check the real code:**
 - Endpoint: `src/test/java/com/gabriel/endpoints/PostsEndpoint.java`
-- Teste: `src/test/java/com/gabriel/tests/PostsTrainingTest.java`
+- Test: `src/test/java/com/gabriel/tests/PostsTrainingTest.java`
 - Payload: `src/test/java/com/gabriel/payloads/PostPayload.java`

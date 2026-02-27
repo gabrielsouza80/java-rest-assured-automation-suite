@@ -14,7 +14,7 @@ public final class TestConfig {
         try (InputStream inputStream = openConfigStream()) {
             PROPERTIES.load(inputStream);
         } catch (IOException error) {
-            throw new IllegalStateException("Falha ao carregar configurações de teste.", error);
+            throw new IllegalStateException("Failed to load test configuration.", error);
         }
     }
 
@@ -30,7 +30,7 @@ public final class TestConfig {
             return Files.newInputStream(fallbackPath);
         }
 
-        throw new IllegalStateException("Arquivo config/config.properties não encontrado.");
+        throw new IllegalStateException("File config/config.properties was not found.");
     }
 
     private TestConfig() {

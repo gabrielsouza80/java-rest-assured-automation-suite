@@ -1,56 +1,56 @@
 # Java Rest Assured Automation Suite
 
-Framework de automação de testes de API desenvolvido em Java utilizando Rest Assured, Maven e JUnit 5.  
-O objetivo deste projeto é praticar, estruturar e evoluir testes de API seguindo padrões corporativos de modularização, organização e boas práticas.
+API test automation framework built in Java using Rest Assured, Maven, and JUnit 5.  
+The goal of this project is to practice, structure, and evolve API testing following corporate-style modularization, organization, and best practices.
 
-## Tecnologias
+## Technologies
 - Java 21 (LTS)
 - Maven
 - Rest Assured
 - JUnit 5
-- VS Code (ou qualquer IDE compatível)
+- VS Code (or any compatible IDE)
 
-## Objetivos do Projeto
+## Project Goals
 - Criar testes GET, POST, PUT, DELETE
 - Validar payloads JSON
-- Implementar configuração global do Rest Assured
-- Estruturar o projeto em camadas (base, endpoints, payloads, tests)
-- Evoluir para autenticação, testes parametrizados e relatórios
+- Implement global Rest Assured configuration
+- Structure the project in layers (base, endpoints, payloads, tests)
+- Evolve toward authentication, parameterized tests, and reporting
 
-## Pré-requisitos
+## Prerequisites
 - JDK 21 instalado e configurado no `JAVA_HOME`
 - Maven 3.9+
 
-## Como executar
+## How to Run
 ```bash
 mvn clean test
 ```
 
-## Saída legível (PowerShell)
-Se o log bruto do VS Code estiver confuso, rode:
+## Readable Output (PowerShell)
+If the raw VS Code log is hard to read, run:
 
 ```powershell
 ./scripts/run-training.ps1
 ```
 
-Para uma classe específica:
+For a specific class:
 
 ```powershell
 ./scripts/run-training.ps1 -TestClass PostsCrudTest
 ```
 
-## Configuração
-Arquivo: `src/test/resources/config/config.properties`
+## Configuration
+File: `src/test/resources/config/config.properties`
 
 ```properties
 api.content.type=application/json
 api.practice.base.url=https://jsonplaceholder.typicode.com
 ```
 
-- Não é necessária API key para JSONPlaceholder.
+- No API key is required for JSONPlaceholder.
 
-## Cenários implementados
-- `PostsCrudTest`: fluxo completo usando `JSONPlaceholder`
+## Implemented Scenarios
+- `PostsCrudTest`: full flow using `JSONPlaceholder`
     - `GET /posts`
     - `GET /posts/1`
     - `GET /posts/99999` (not found)
@@ -58,21 +58,21 @@ api.practice.base.url=https://jsonplaceholder.typicode.com
     - `PUT /posts/1`
     - `PATCH /posts/1`
     - `DELETE /posts/1`
-    - `GET /posts?userId=1` (filtro)
-    - `GET /posts/1/comments` (rota aninhada)
+    - `GET /posts?userId=1` (filter)
+    - `GET /posts/1/comments` (nested route)
 
-- `PostPayloadTest`: valida montagem de payloads para criação e atualização
-- `TestDataTest`: valida leitura dos dados de teste do JSON
-- `TestConfigTest`: valida leitura das configurações do projeto
+- `PostPayloadTest`: validates payload assembly for create and update
+- `TestDataTest`: validates reading test data from JSON
+- `TestConfigTest`: validates reading project configuration
 
-> Observação: JSONPlaceholder simula persistência para POST/PUT/PATCH/DELETE.
+> Note: JSONPlaceholder simulates persistence for POST/PUT/PATCH/DELETE.
 
-## Estratégia de testes (didática)
-- Testes de `config/data/payload` rodam sem internet e garantem a base do framework
-- Testes de `PostsCrudTest` validam os endpoints reais da API
-- Assim você aprende primeiro a estrutura, depois o comportamento HTTP
+## Testing Strategy (Didactic)
+- `config/data/payload` tests run offline and ensure framework fundamentals
+- `PostsCrudTest` tests validate real API endpoints
+- This approach helps you learn structure first, then HTTP behavior
 
-## Estrutura inicial
+## Initial Structure
 ```text
 src
  └── test
@@ -87,7 +87,7 @@ src
           └── data
 ```
 
-## Equivalência com Playwright
+## Playwright Equivalence
 - `pages` (UI) -> `endpoints` (API)
-- `BaseTest` continua existindo para setup global
-- `config` e `resources/data` continuam com o mesmo papel
+- `BaseTest` still exists for global setup
+- `config` and `resources/data` keep the same role
